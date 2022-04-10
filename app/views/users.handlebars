@@ -1,0 +1,34 @@
+<h1>Users</h1>
+
+<div>
+    {{#if users}}
+        <table>
+            <tr>
+                <th>Users</th>
+                <th>Podcasts</th>
+                <th>Collections</th>
+            </tr>
+            {{#each users}}
+                <tr>
+                    <td>{{this.username}}</td>
+                    <td>
+                        <form method="post" action="/user-podcasts" class="inline">
+                            <button class="green-button" type="submit" id="user_podcast_btn" name="user_podcast_id" value="{{this.id}}">
+                                See Podcasts
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="/user-collections" class="inline">
+                            <button class="green-button" type="submit" id="user_collection_btn" name="user_collection_id" value="{{this.id}}">
+                                See Collections
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+    {{else}}
+        <h3>Failed to load users.</h3>
+    {{/if}}
+</div>

@@ -1,0 +1,22 @@
+<h1>Collections</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Creator</th>
+        <th>Episodes</th>
+    </tr>
+    {{#each collections}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.username}}</td>
+            <td>
+                <form method="post" action="/collection-episodes" class="inline">
+                    <button class="green-button" type="submit" id="collection_btn" name="collection_id" value="{{this.id}}">
+                        See Episodes
+                    </button>
+                </form>
+            </td>
+        </tr>
+    {{/each}}
+</table>

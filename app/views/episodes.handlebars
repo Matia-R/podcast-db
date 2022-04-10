@@ -1,0 +1,18 @@
+<h1>{{name}}</h1>
+
+<div>
+    {{#if episodes}}
+        <table>
+            <tr>
+                <th>Episodes</th>
+            </tr>
+            {{#each episodes}}
+                <tr>
+                    <td>{{this.title}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    {{else}}
+        <h3>No episodes have been uploaded yet.</h3>
+    {{/if}}
+</div>

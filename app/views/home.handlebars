@@ -1,0 +1,48 @@
+<h1>Podcasts</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Genre</th>
+        <th>Publisher</th>
+        <th>Episodes</th>
+    </tr>
+    {{#each podcasts}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.genre}}</td>
+            <td>{{this.username}}</td>
+            <td>
+                <form method="post" action="/podcast-episodes" class="inline">
+                    <button class="green-button" type="submit" id="podcast_btn" name="podcast_id" value="{{this.id}}">
+                        See Episodes
+                    </button>
+                </form>
+            </td>
+        </tr>
+    {{/each}}
+</table>
+
+<div class="add-section">
+    <h1>Publish a Podcast</h1>
+    <form action="/add-podcast" method="post">
+        <h2>Podcast Name</h2>
+        <input type="text" name="name" placeholder="Podcast Name">
+        <h2>Genre</h2>
+        <label for="lifestyle">Lifestyle</label>
+        <input type="checkbox" name='lifestyle' id="lifestyle" value="Lifestyle">
+        <label for="comedy">Comedy</label>
+        <input type="checkbox" name='comedy' id="comedy" value="Comedy">
+        <label for="science">Science</label>
+        <input type="checkbox" name='science' id="science" value="Science">
+        <label for="sports">Sports</label>
+        <input type="checkbox" name='sports' id="sports" value="Sports">
+        <label for="cinema">Cinema</label>
+        <input type="checkbox" name='cienma' id="cinema" value="Cinema">
+        <label for="music">Music</label>
+        <input type="checkbox" name='msuic' id="music" value="Music">
+        <label for="politics">Politics</label>
+        <input type="checkbox" name='politics' id="politics" value="Politics">
+        <input type="submit" value="Add Podcast">
+    </form>
+</div>
