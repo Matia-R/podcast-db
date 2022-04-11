@@ -1,6 +1,5 @@
 --delete previous instances of tables if they exist - idempotent for multiple script runs
 drop table if exists users;
-drop table if exists followers;
 drop table if exists podcasts;
 drop table if exists episodes;
 drop table if exists collections;
@@ -14,21 +13,18 @@ create table users (
     password text not null
 );
 
-create table followers (
-    follower_id integer not null,
-    followee_id integer not null
-);
-
 create table podcasts (
     id integer primary key,
     name text not null,
     genre text not null,
+    publication_date text not null,
     publisher_id integer not null
 );
 
 create table episodes (
     id integer primary key,
     title text not null,
+    runtime integer not null,
     podcast_id integer not null
 );
 
@@ -63,134 +59,100 @@ insert into users (username, password) values ('Bill', 'llib*&');
 insert into users (username, password) values ('Jacob', '4011**');
 insert into users (username, password) values ('Adam', 'Arch*&');
 
---populate followers table
-insert into followers (follower_id, followee_id) values (2, 4);
-insert into followers (follower_id, followee_id) values (2, 5);
-insert into followers (follower_id, followee_id) values (3, 5);
-insert into followers (follower_id, followee_id) values (3, 7);
-insert into followers (follower_id, followee_id) values (3, 8);
-insert into followers (follower_id, followee_id) values (4, 2);
-insert into followers (follower_id, followee_id) values (4, 3);
-insert into followers (follower_id, followee_id) values (4, 5);
-insert into followers (follower_id, followee_id) values (5, 2);
-insert into followers (follower_id, followee_id) values (5, 3);
-insert into followers (follower_id, followee_id) values (5, 4);
-insert into followers (follower_id, followee_id) values (5, 7);
-insert into followers (follower_id, followee_id) values (5, 9);
-insert into followers (follower_id, followee_id) values (6, 2);
-insert into followers (follower_id, followee_id) values (6, 3);
-insert into followers (follower_id, followee_id) values (6, 4);
-insert into followers (follower_id, followee_id) values (6, 5);
-insert into followers (follower_id, followee_id) values (6, 7);
-insert into followers (follower_id, followee_id) values (7, 2);
-insert into followers (follower_id, followee_id) values (7, 3);
-insert into followers (follower_id, followee_id) values (7, 4);
-insert into followers (follower_id, followee_id) values (7, 9);
-insert into followers (follower_id, followee_id) values (8, 2);
-insert into followers (follower_id, followee_id) values (8, 3);
-insert into followers (follower_id, followee_id) values (8, 4);
-insert into followers (follower_id, followee_id) values (8, 5);
-insert into followers (follower_id, followee_id) values (8, 7);
-insert into followers (follower_id, followee_id) values (9, 2);
-insert into followers (follower_id, followee_id) values (9, 3);
-insert into followers (follower_id, followee_id) values (9, 4);
-insert into followers (follower_id, followee_id) values (9, 5);
-insert into followers (follower_id, followee_id) values (9, 7);
-
 
 --populate podcasts table
-insert into podcasts(name, genre, publisher_id) values ('The Adam Archer Experience', 'Lifestyle', 2);
-insert into podcasts(name, genre, publisher_id) values ('The Roe Jogan Experience', 'Comedy', 3);
-insert into podcasts(name, genre, publisher_id) values ('Armchair Engineer', 'Science', 4);
-insert into podcasts(name, genre, publisher_id) values ('Morning Cofee', 'Lifestyle', 5);
-insert into podcasts(name, genre, publisher_id) values ('Buzzer Beater', 'Sports', 6);
-insert into podcasts(name, genre, publisher_id) values ('The Flick Pick', 'Cinema', 7);
-insert into podcasts(name, genre, publisher_id) values ('Heart and Soul', 'Music', 8);
-insert into podcasts(name, genre, publisher_id) values ('Addicted to the shindig', 'Music', 9);
-insert into podcasts(name, genre, publisher_id) values ('The Daily Show', 'Comedy', 10);
-insert into podcasts(name, genre, publisher_id) values ('The Blue Box', 'Politics', 11);
-insert into podcasts(name, genre, publisher_id) values ('Our Blue Planet', 'Science', 12);
+insert into podcasts(name, genre, publication_date, publisher_id) values ('The Adam Archer Experience', 'Lifestyle', 'January 3, 2020', 2);
+insert into podcasts(name, genre, publication_date, publisher_id) values ('The Roe Jogan Experience', 'Comedy', 'September 28, 2014', 3);
+insert into podcasts(name, genre, publication_date, publisher_id) values ('Armchair Engineer', 'Science', 'August 4, 2019', 4);
+insert into podcasts(name, genre, publication_date, publisher_id) values ('Morning Cofee', 'Lifestyle', 'April 19, 2015', 5);
+insert into podcasts(name, genre, publication_date, publisher_id) values ('Buzzer Beater', 'Sports', 'February 12, 2016', 6);
+insert into podcasts(name, genre, publication_date, publisher_id) values ('The Flick Pick', 'Cinema', 'May 14, 2019', 7);
+insert into podcasts(name, genre, publication_date, publisher_id) values ('Heart and Soul', 'Music', 'June 16 2011', 8);
+insert into podcasts(name, genre, publication_date, publisher_id) values ('Addicted to the shindig', 'Music', 'October 25, 2016', 9);
+insert into podcasts(name, genre, publication_date, publisher_id) values ('The Daily Show', 'Comedy', 'July 8, 2013', 10);
+insert into podcasts(name, genre, publication_date, publisher_id) values ('The Blue Box', 'Politics', 'November 22, 2018', 11);
+insert into podcasts(name, genre, publication_date, publisher_id) values ('Our Blue Planet', 'Science', 'December 10, 2021', 12);
 
 --populate episodes table
-insert into episodes (title, podcast_id) values ('The Adam Archer Experience - Episode 1', 1);
-insert into episodes (title, podcast_id) values ('The Adam Archer Experience - Episode 2', 1);
-insert into episodes (title, podcast_id) values ('The Adam Archer Experience - Episode 3', 1);
-insert into episodes (title, podcast_id) values ('The Adam Archer Experience - Episode 4', 1);
-insert into episodes (title, podcast_id) values ('The Adam Archer Experience - Episode 5', 1);
-insert into episodes (title, podcast_id) values ('The Adam Archer Experience - Episode 6', 1);
-insert into episodes (title, podcast_id) values ('The Adam Archer Experience - Episode 7', 1);
-insert into episodes (title, podcast_id) values ('The Adam Archer Experience - Episode 8', 1);
-insert into episodes (title, podcast_id) values ('The Adam Archer Experience - Episode 9', 1);
-insert into episodes (title, podcast_id) values ('The Adam Archer Experience - Episode 10', 1);
-insert into episodes (title, podcast_id) values ('ep1 - Chris Rock', 2);
-insert into episodes (title, podcast_id) values ('ep2 - Ari Shafir', 2);
-insert into episodes (title, podcast_id) values ('ep3 -  Dave Chapelle', 2);
-insert into episodes (title, podcast_id) values ('ep4 - Colin Jost', 2);
-insert into episodes (title, podcast_id) values ('ep5 - Jim Jefferies', 2);
-insert into episodes (title, podcast_id) values ('ep6 - Russell Peters', 2);
-insert into episodes (title, podcast_id) values ('ep7 - Bert Kreischer', 2);
-insert into episodes (title, podcast_id) values ('ep8 - Tom Segura', 2);
-insert into episodes (title, podcast_id) values ('Armchair Engineer - Elon Musk', 3);
-insert into episodes (title, podcast_id) values ('Armchair Engineer - Bill Gates', 3);
-insert into episodes (title, podcast_id) values ('Armchair Engineer - Mark Zuckerberg', 3);
-insert into episodes (title, podcast_id) values ('Morning Cofee - ep1', 4);
-insert into episodes (title, podcast_id) values ('Morning Cofee - ep2', 4);
-insert into episodes (title, podcast_id) values ('Morning Cofee - ep3', 4);
-insert into episodes (title, podcast_id) values ('Morning Cofee - ep4', 4);
-insert into episodes (title, podcast_id) values ('Morning Cofee - ep5', 4);
-insert into episodes (title, podcast_id) values ('Morning Cofee - ep6', 4);
-insert into episodes (title, podcast_id) values ('Morning Cofee - ep7', 4);
-insert into episodes (title, podcast_id) values ('Morning Cofee - ep8', 4);
-insert into episodes (title, podcast_id) values ('Morning Cofee - ep9', 4);
-insert into episodes (title, podcast_id) values ('Morning Cofee - ep10', 4);
-insert into episodes (title, podcast_id) values ('Episode 1 ft. Steve Kerr', 5);
-insert into episodes (title, podcast_id) values ('Episode 2  ft. Chris Bosh', 5);
-insert into episodes (title, podcast_id) values ('Episode 3 ft. Scottie Pippin', 5);
-insert into episodes (title, podcast_id) values ('Episode 4 ft. Shaq', 5);
-insert into episodes (title, podcast_id) values ('Episode 5 ft. Kareem Abdul-Jabbar', 5);
-insert into episodes (title, podcast_id) values ('Episode 6 ft. Magic Johnson', 5);
-insert into episodes (title, podcast_id) values ('Episode 7 ft. Larry Bird', 5);
-insert into episodes (title, podcast_id) values ('Episode 8 ft. Kevin Garnett', 5);
-insert into episodes (title, podcast_id) values ('Episode 9 ft. Charles Barkley', 5);
-insert into episodes (title, podcast_id) values ('Episode 10 ft. Isiah Thomas', 5);
-insert into episodes (title, podcast_id) values ('Episode 11 ft. Michael Jordan', 5);
-insert into episodes (title, podcast_id) values ('Retro Rewind: Back to the future', 6);
-insert into episodes (title, podcast_id) values ('Retro Rewind: The Matrix', 6);
-insert into episodes (title, podcast_id) values ('Interview: James Cameron', 6);
-insert into episodes (title, podcast_id) values ('Interview: Steven Spielberg', 6);
-insert into episodes (title, podcast_id) values ('Retro Rewind: Indiana Jones', 6);
-insert into episodes (title, podcast_id) values ('Retro Rewind: Star Wars', 6);
-insert into episodes (title, podcast_id) values ('Interview: George Lucas', 6);
-insert into episodes (title, podcast_id) values ('Jamming with Chris Stapleton', 7);
-insert into episodes (title, podcast_id) values ('Jamming with Luke Combs', 7);
-insert into episodes (title, podcast_id) values ('Jamming with Kenny Rogers', 7);
-insert into episodes (title, podcast_id) values ('Jamming with Eric Church', 7);
-insert into episodes (title, podcast_id) values ('Episode 1 - Foo fighters', 8);
-insert into episodes (title, podcast_id) values ('Episode 2 - Blink183', 8);
-insert into episodes (title, podcast_id) values ('Episode 3 - Rage Against the Machine', 8);
-insert into episodes (title, podcast_id) values ('Episode 4 - The Cure', 8);
-insert into episodes (title, podcast_id) values ('Episode 5 - The Ramones', 8);
-insert into episodes (title, podcast_id) values ('Episode 6 - Sound Garden', 8);
-insert into episodes (title, podcast_id) values ('Episode 7 - Pearl Jam', 8);
-insert into episodes (title, podcast_id) values ('Episode 8 - Red Hot Chilli Peppers', 8);
-insert into episodes (title, podcast_id) values ('Episode 9 - Janes Addiction', 8);
-insert into episodes (title, podcast_id) values ('The Daily Show - Episode 1', 8);
-insert into episodes (title, podcast_id) values ('The Daily Show - Episode 2', 8);
-insert into episodes (title, podcast_id) values ('The Daily Show - Episode 3', 8);
-insert into episodes (title, podcast_id) values ('The Daily Show - Episode 4', 8);
-insert into episodes (title, podcast_id) values ('The Daily Show - Episode 5', 8);
-insert into episodes (title, podcast_id) values ('The Daily Show - Episode 6', 8);
-insert into episodes (title, podcast_id) values ('The Daily Show - Episode 7', 8);
-insert into episodes (title, podcast_id) values ('The Daily Show - Episode 8', 8);
-insert into episodes (title, podcast_id) values ('The Daily Show - Episode 9', 8);
-insert into episodes (title, podcast_id) values ('The Daily Show - Episode 10', 8);
-insert into episodes (title, podcast_id) values ('The Blue Box (ft. Bill Maher)', 9);
-insert into episodes (title, podcast_id) values ('The Blue Box (ft. John Oliver)', 9);
-insert into episodes (title, podcast_id) values ('The Blue Box (ft. Jake Tapper)', 9);
-insert into episodes (title, podcast_id) values ('The Blue Box (ft. Anderson Cooper)', 9);
-insert into episodes (title, podcast_id) values ('OBP ep1, climate catastrophes ft. Bill Gates', 10);
-insert into episodes (title, podcast_id) values ('OBP ep2, Australian Sperm Wales', 10);
-insert into episodes (title, podcast_id) values ('OBP ep2, Antarctica', 10);
+insert into episodes (title, runtime, podcast_id) values ('The Adam Archer Experience - Episode 1', 64, 1);
+insert into episodes (title, runtime, podcast_id) values ('The Adam Archer Experience - Episode 2', 59, 1);
+insert into episodes (title, runtime, podcast_id) values ('The Adam Archer Experience - Episode 3', 52, 1);
+insert into episodes (title, runtime, podcast_id) values ('The Adam Archer Experience - Episode 4', 60, 1);
+insert into episodes (title, runtime, podcast_id) values ('The Adam Archer Experience - Episode 5', 63, 1);
+insert into episodes (title, runtime, podcast_id) values ('The Adam Archer Experience - Episode 6', 59, 1);
+insert into episodes (title, runtime, podcast_id) values ('The Adam Archer Experience - Episode 7', 52, 1);
+insert into episodes (title, runtime, podcast_id) values ('The Adam Archer Experience - Episode 8', 54, 1);
+insert into episodes (title, runtime, podcast_id) values ('The Adam Archer Experience - Episode 9', 61, 1);
+insert into episodes (title, runtime, podcast_id) values ('The Adam Archer Experience - Episode 10', 62, 1);
+insert into episodes (title, runtime, podcast_id) values ('ep1 - Chris Rock', 53, 2);
+insert into episodes (title, runtime, podcast_id) values ('ep2 - Ari Shafir', 57, 2);
+insert into episodes (title, runtime, podcast_id) values ('ep3 -  Dave Chapelle', 51, 2);
+insert into episodes (title, runtime, podcast_id) values ('ep4 - Colin Jost', 59, 2);
+insert into episodes (title, runtime, podcast_id) values ('ep5 - Jim Jefferies', 58, 2);
+insert into episodes (title, runtime, podcast_id) values ('ep6 - Russell Peters', 54, 2);
+insert into episodes (title, runtime, podcast_id) values ('ep7 - Bert Kreischer', 51, 2);
+insert into episodes (title, runtime, podcast_id) values ('ep8 - Tom Segura', 59, 2);
+insert into episodes (title, runtime, podcast_id) values ('Armchair Engineer - Elon Musk', 62, 3);
+insert into episodes (title, runtime, podcast_id) values ('Armchair Engineer - Bill Gates', 64, 3);
+insert into episodes (title, runtime, podcast_id) values ('Armchair Engineer - Mark Zuckerberg', 67, 3);
+insert into episodes (title, runtime, podcast_id) values ('Morning Cofee - ep1', 67, 4);
+insert into episodes (title, runtime, podcast_id) values ('Morning Cofee - ep2', 62, 4);
+insert into episodes (title, runtime, podcast_id) values ('Morning Cofee - ep3', 63, 4);
+insert into episodes (title, runtime, podcast_id) values ('Morning Cofee - ep4', 61, 4);
+insert into episodes (title, runtime, podcast_id) values ('Morning Cofee - ep5', 64, 4);
+insert into episodes (title, runtime, podcast_id) values ('Morning Cofee - ep6', 66, 4);
+insert into episodes (title, runtime, podcast_id) values ('Morning Cofee - ep7', 67, 4);
+insert into episodes (title, runtime, podcast_id) values ('Morning Cofee - ep8', 65, 4);
+insert into episodes (title, runtime, podcast_id) values ('Morning Cofee - ep9', 61, 4);
+insert into episodes (title, runtime, podcast_id) values ('Morning Cofee - ep10', 62, 4);
+insert into episodes (title, runtime, podcast_id) values ('Episode 1 ft. Steve Kerr', 67, 5);
+insert into episodes (title, runtime, podcast_id) values ('Episode 2  ft. Chris Bosh', 68, 5);
+insert into episodes (title, runtime, podcast_id) values ('Episode 3 ft. Scottie Pippin', 69, 5);
+insert into episodes (title, runtime, podcast_id) values ('Episode 4 ft. Shaq', 61, 5);
+insert into episodes (title, runtime, podcast_id) values ('Episode 5 ft. Kareem Abdul-Jabbar', 62, 5);
+insert into episodes (title, runtime, podcast_id) values ('Episode 6 ft. Magic Johnson', 63, 5);
+insert into episodes (title, runtime, podcast_id) values ('Episode 7 ft. Larry Bird', 64, 5);
+insert into episodes (title, runtime, podcast_id) values ('Episode 8 ft. Kevin Garnett', 67, 5);
+insert into episodes (title, runtime, podcast_id) values ('Episode 9 ft. Charles Barkley', 68, 5);
+insert into episodes (title, runtime, podcast_id) values ('Episode 10 ft. Isiah Thomas', 61, 5);
+insert into episodes (title, runtime, podcast_id) values ('Episode 11 ft. Michael Jordan', 64, 5);
+insert into episodes (title, runtime, podcast_id) values ('Retro Rewind: Back to the future', 69, 6);
+insert into episodes (title, runtime, podcast_id) values ('Retro Rewind: The Matrix', 56, 6);
+insert into episodes (title, runtime, podcast_id) values ('Interview: James Cameron', 51, 6);
+insert into episodes (title, runtime, podcast_id) values ('Interview: Steven Spielberg', 54, 6);
+insert into episodes (title, runtime, podcast_id) values ('Retro Rewind: Indiana Jones', 52, 6);
+insert into episodes (title, runtime, podcast_id) values ('Retro Rewind: Star Wars', 51, 6);
+insert into episodes (title, runtime, podcast_id) values ('Interview: George Lucas', 58, 6);
+insert into episodes (title, runtime, podcast_id) values ('Jamming with Chris Stapleton', 62, 7);
+insert into episodes (title, runtime, podcast_id) values ('Jamming with Luke Combs', 61, 7);
+insert into episodes (title, runtime, podcast_id) values ('Jamming with Kenny Rogers', 59, 7);
+insert into episodes (title, runtime, podcast_id) values ('Jamming with Eric Church', 57, 7);
+insert into episodes (title, runtime, podcast_id) values ('Episode 1 - Foo fighters', 68, 8);
+insert into episodes (title, runtime, podcast_id) values ('Episode 2 - Blink183', 67, 8);
+insert into episodes (title, runtime, podcast_id) values ('Episode 3 - Rage Against the Machine', 61, 8);
+insert into episodes (title, runtime, podcast_id) values ('Episode 4 - The Cure', 63, 8);
+insert into episodes (title, runtime, podcast_id) values ('Episode 5 - The Ramones', 66, 8);
+insert into episodes (title, runtime, podcast_id) values ('Episode 6 - Sound Garden', 61, 8);
+insert into episodes (title, runtime, podcast_id) values ('Episode 7 - Pearl Jam', 64, 8);
+insert into episodes (title, runtime, podcast_id) values ('Episode 8 - Red Hot Chilli Peppers', 72, 8);
+insert into episodes (title, runtime, podcast_id) values ('Episode 9 - Janes Addiction', 68, 8);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 1', 61, 8);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 2', 64, 8);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 3', 67, 8);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 4', 63, 8);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 5', 65, 8);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 6', 68, 8);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 7', 70, 8);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 8', 61, 8);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 9', 63, 8);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 10', 64, 8);
+insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. Bill Maher)', 72, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. John Oliver)', 75, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. Jake Tapper)', 78, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. Anderson Cooper)', 671, 9);
+insert into episodes (title, runtime, podcast_id) values ('OBP ep1, climate catastrophes ft. Bill Gates', 59, 10);
+insert into episodes (title, runtime, podcast_id) values ('OBP ep2, Australian Sperm Wales', 84, 10);
+insert into episodes (title, runtime, podcast_id) values ('OBP ep2, Antarctica', 87, 10);
 
 --populate collections table
 insert into collections (name, creator_id) values ('Best of AAE', 1);
