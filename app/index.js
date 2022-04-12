@@ -91,6 +91,15 @@ app.post('/user-collections', async(req, res) => {
     res.render('collections', { collections });
 });
 
+app.post('/search-podcasts', async(req, res) => {
+    const db = await dbPromise;
+    const { search_term } = req.body;
+    const podcasts = await db.all(`SELECT podcasts.id, name, genre, publication_date, username FROM podcasts JOIN users ON podcasts.publisher_id = users.id WHERE name LIKE '%${search_term}%' OR genre LIKE '%${search_term}%' OR username LIKE '%${search_term}%'`);
+    console.log(`SELECT podcasts.id, name, genre, publication_date, username FROM podcasts JOIN users ON podcasts.publisher_id = users.id WHERE name LIKE '%${search_term}%' OR genre LIKE '%${search_term}% OR username LIKE '%${search_term}%'`);
+    const addPod = true;
+    res.render('home', { podcasts, addPod });
+});
+
 app.post('/add-podcast', async(req, res) => {
     const db = await dbPromise;
     const { name, lifestyle, comedy, science, sports, cinema, music, politics } = req.body;

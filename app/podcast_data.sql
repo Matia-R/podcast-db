@@ -46,7 +46,7 @@ create table libraries (
 
 --populate users table
 insert into users (username, password) values ('admin', 'admin');
-insert into users (username, password) values ('Mark', 'm123');
+insert into users (username, password) values ('Adam', 'm123');
 insert into users (username, password) values ('John', 'j456');
 insert into users (username, password) values ('Jane', 'ja789');
 insert into users (username, password) values ('Bob', 'b123');
@@ -136,23 +136,23 @@ insert into episodes (title, runtime, podcast_id) values ('Episode 6 - Sound Gar
 insert into episodes (title, runtime, podcast_id) values ('Episode 7 - Pearl Jam', 64, 8);
 insert into episodes (title, runtime, podcast_id) values ('Episode 8 - Red Hot Chilli Peppers', 72, 8);
 insert into episodes (title, runtime, podcast_id) values ('Episode 9 - Janes Addiction', 68, 8);
-insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 1', 61, 8);
-insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 2', 64, 8);
-insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 3', 67, 8);
-insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 4', 63, 8);
-insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 5', 65, 8);
-insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 6', 68, 8);
-insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 7', 70, 8);
-insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 8', 61, 8);
-insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 9', 63, 8);
-insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 10', 64, 8);
-insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. Bill Maher)', 72, 9);
-insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. John Oliver)', 75, 9);
-insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. Jake Tapper)', 78, 9);
-insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. Anderson Cooper)', 671, 9);
-insert into episodes (title, runtime, podcast_id) values ('OBP ep1, climate catastrophes ft. Bill Gates', 59, 10);
-insert into episodes (title, runtime, podcast_id) values ('OBP ep2, Australian Sperm Wales', 84, 10);
-insert into episodes (title, runtime, podcast_id) values ('OBP ep2, Antarctica', 87, 10);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 1', 61, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 2', 64, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 3', 67, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 4', 63, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 5', 65, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 6', 68, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 7', 70, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 8', 61, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 9', 63, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Daily Show - Episode 10', 64, 9);
+insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. Bill Maher)', 72, 10);
+insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. John Oliver)', 75, 10);
+insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. Jake Tapper)', 78, 10);
+insert into episodes (title, runtime, podcast_id) values ('The Blue Box (ft. Anderson Cooper)', 71, 10);
+insert into episodes (title, runtime, podcast_id) values ('OBP ep1, climate catastrophes ft. Bill Gates', 59, 11);
+insert into episodes (title, runtime, podcast_id) values ('OBP ep2, Australian Sperm Wales', 84, 11);
+insert into episodes (title, runtime, podcast_id) values ('OBP ep2, Antarctica', 87, 11);
 
 --populate collections table
 insert into collections (name, creator_id) values ('Best of AAE', 1);

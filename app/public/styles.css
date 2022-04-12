@@ -10,6 +10,23 @@ form {
     margin-left: 10px;
 }
 
+.searchbox {
+  padding: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 17px;
+}
+
+#search-btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 6px;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    margin-left: 10px;
+}
+
 #header {
     list-style-type: none;
     margin: 0;
